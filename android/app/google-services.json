@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "789026178813",
+    "project_id": "dekoda9-30257",
+    "storage_bucket": "dekoda9-30257.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789026178813:android:e5e7947c8f4fb8887f2094",
+        "android_client_info": {
+          "package_name": "com.example.dekoda9"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "789026178813-8vsqm8h5pnt6r6g1vov6hph0071og0e1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9bO7iTw0MMBPh81zJCgmro5L1dNXfBDs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "789026178813-8vsqm8h5pnt6r6g1vov6hph0071og0e1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
