@@ -1,7 +1,10 @@
 import 'package:dekoda9/Authentication/auth_process.dart';
 import 'package:dekoda9/firebase_options.dart';
+import 'package:dekoda9/theme/light.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:dekoda9/theme/dark.dart';
+
 
 
 void main() async{
@@ -21,9 +24,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      //debugShowCheckedModeBanner: false,
-      home: AuthProcess(),
+    return  MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: whiteTheme,
+      darkTheme: blackTheme,
+      home: const AuthProcess(),
     );
   }
 }

@@ -21,11 +21,12 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.black,
+      color: Theme.of(context).colorScheme.background,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
 
       child: GNav(
-        color: Colors.white,
+
+        color: Colors.grey.shade600,
         activeColor: Colors.white,
         tabBackgroundColor: Colors.grey.shade800,
         padding: const EdgeInsets.all(16),
@@ -33,7 +34,7 @@ class BottomNavBar extends StatelessWidget {
         onTabChange: (value) => onTabChange!(value),
         tabs: const [
           GButton(
-            icon: Icons.home,
+            icon: Icons.newspaper,
             text: 'Home',
           ),
           GButton(

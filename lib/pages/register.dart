@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dekoda9/components/button.dart';
 import 'package:dekoda9/components/text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
   final Function()? onTap;
-  const SignUp({super.key,required this.onTap});
+  const SignUp({super.key, required this.onTap});
 
   @override
   State<SignUp> createState() => _SignUpState();
@@ -17,41 +18,50 @@ class _SignUpState extends State<SignUp> {
   final passwordTextController = TextEditingController();
   final confirmPasswordTextController = TextEditingController();
 
-  void signUp()async{
-
+  void signUp() async {
     showDialog(
         context: context,
-        builder: (context)=> const Center(
-          child: CircularProgressIndicator(),
-        ));
+        builder: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ));
 
-    if (passwordTextController.text != confirmPasswordTextController.text){
+    if (passwordTextController.text != confirmPasswordTextController.text) {
       Navigator.pop(context);
       displayMessage("Passwords do not match");
       return;
     }
 
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailTextController.text,
-          password: passwordTextController.text,
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailTextController.text,
+        password: passwordTextController.text,
       );
-      if (context.mounted) Navigator.pop(context);
-    }on FirebaseAuthException catch (e){
+      //after user creation...create a new document in cloud firebase called users
+      FirebaseFirestore.instance
+          .collection("Users")
+          .doc(userCredential.user!.email!)
+          .set({
+        'username' : emailTextController.text.split('@')[0],//everything before the @
+        'bio' : 'No bio'
+        //add fields as needed
+      });
+
+      if (context.mounted) return;
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       displayMessage(e.code);
     }
-
   }
+
   void displayMessage(String message) {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text(message),
-        )
-    );
+              title: Text(message),
+            ));
   }
-
 
   @override
   Widget build(BuildContext context) {

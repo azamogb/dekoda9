@@ -1,6 +1,8 @@
 import 'package:dekoda9/components/bottom_nav_bar.dart';
+import 'package:dekoda9/components/drawer.dart';
 import 'package:dekoda9/pages/camera.dart';
 import 'package:dekoda9/pages/news_feed.dart';
+import 'package:dekoda9/pages/policy.dart';
 import 'package:dekoda9/pages/profile.dart';
 import 'package:dekoda9/pages/settings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -35,33 +37,35 @@ class _HomeState extends State<Home> {
     const Settings(),
   ];
 
+  void goToPolicyPage() {
+    Navigator.pop(context);
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const Policy()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: Builder(
-          builder: (context) => IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.menu,
-                color: Colors.black,
-              )),
-        ),
+        //
         title: Text(
           'Welcome ${user.email!}',
-          style: TextStyle(color: Colors.grey.shade800),
+          style: const TextStyle(color: Colors.grey),
         ),
         //backgroundColor: Colors.grey[300],
-        actions: [
-          IconButton(
-              onPressed: signOut, icon: const Icon(Icons.logout_outlined,color: Colors.black,))
-        ],
+      ),
+      drawer: MyDrawer(
+        onPrivacyTap: goToPolicyPage,
+        onSignOut: signOut,
       ),
       body: _pages[_selectedIndex],
+
       bottomNavigationBar: BottomNavBar(
+
         onTabChange: (index) => navigateBottomBar(index),
+
       ),
     );
   }

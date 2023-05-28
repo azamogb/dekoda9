@@ -1,13 +1,18 @@
-// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:dekoda9/components/list_tile.dart';
 import 'package:flutter/material.dart';
 
 
 
 class MyDrawer extends StatelessWidget {
-  const MyDrawer({super.key});
+  final void Function()? onSignOut;
+  final void Function()? onPrivacyTap;
+  const MyDrawer({
+    super.key,
+    required this.onSignOut,
+    required this.onPrivacyTap,
+  });
 
-  // method to log user out
-  // void logUserOut(BuildContext context) {
+  // void signOut() {
   //   FirebaseAuth.instance.signOut();
   // }
 
@@ -16,54 +21,53 @@ class MyDrawer extends StatelessWidget {
     return Drawer(
       backgroundColor: Colors.grey[300],
       child: Column(
-        children: [
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children:  [
           // Drawer header
-          const DrawerHeader(
-            child: Center(
-              child: Icon(
-                Icons.phone_iphone_rounded,
-                size: 64,
-              ),
-            ),
-          ),
-
-          const SizedBox(height: 25),
-
-          // ABOUT PAGE
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: GestureDetector(
-              onTap: () {
-                // Navigator.pop(context);
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => const (),
-                //   ),
-                // );
-              },
-              child: ListTile(
-                leading: const Icon(Icons.info),
-                title: Text(
-                  "A B O U T",
-                  style: TextStyle(color: Colors.grey[700]),
+            Column(children: [
+              const DrawerHeader(
+                child: Center(
+                  child: Icon(
+                    Icons.person,
+                    size: 64,
+                  ),
                 ),
               ),
-            ),
-          ),
 
+
+              //home
+              //  MyListTile(
+              //     icon: Icons.home,
+              //     text: 'Home',
+              //     onTap: ,
+              //
+              //  ),
+
+
+              // ABOUT PAGE
+              //  MyListTile(
+              //     icon: Icons.info,
+              //     text: 'About',
+              //     onTap: ,
+              //  ),
+
+              MyListTile(
+                  icon: Icons.privacy_tip,
+                  text: 'Privacy Policy',
+                  onTap: onPrivacyTap),
+
+
+            ],),
           // LOGOUT BUTTON
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
-          //   child: ListTile(
-          //     leading: const Icon(Icons.logout),
-          //     onTap: () => logUserOut(context),
-          //     title: Text(
-          //       "L O G O U T",
-          //       style: TextStyle(color: Colors.grey[700]),
-          //     ),
-          //   ),
-          // ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 25.0),
+            child: MyListTile(
+                icon: Icons.logout,
+                text: 'Logout',
+                onTap: onSignOut,
+            ),
+          )
+
         ],
       ),
     );
