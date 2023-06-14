@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dekoda9/components/comment_button.dart';
 import 'package:dekoda9/components/delete_button.dart';
 import 'package:dekoda9/components/like_button.dart';
+import 'package:dekoda9/components/share_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:dekoda9/components/comment.dart';
@@ -105,7 +106,8 @@ class _WallPostState extends State<WallPost> {
                 _commentTextController.clear();
               },
               child: const Text("Post",
-                )),
+                )
+          ),
         ],
       ),
     );
@@ -142,14 +144,16 @@ class _WallPostState extends State<WallPost> {
               //delete from app
               FirebaseFirestore.instance.collection("User Posts")
               .doc(widget.postId).delete()
-              .then((value) => print("Post deleted"))
-                  .catchError((error) => print("Failed to delete: $error"));
+              .then((value) => const Text("Post deleted"))
+                  .catchError((error) => Text("Failed to delete: $error"));
 
               //close dialogue box
+              if (context.mounted) return;
               Navigator.pop(context);
             },
                 child: const Text("Delete",
-                )),
+                )
+            ),
           ],
         ));
   }
@@ -164,7 +168,7 @@ class _WallPostState extends State<WallPost> {
       margin: const EdgeInsets.only(top: 25, left: 25, right: 25),
       padding: const EdgeInsets.all(25),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+       // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(
             width: 20,
@@ -173,27 +177,35 @@ class _WallPostState extends State<WallPost> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
             children: [
-
               // group of text(message, user email)
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(widget.message),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Row(
-                    children: [
-                      Text(widget.user,
-                        style: TextStyle(color: Colors.grey.shade400),),
-                      Text(" . ",
-                        style: TextStyle(color: Colors.grey.shade400),),
-                      Text(widget.time,
-                        style: TextStyle(color: Colors.grey.shade400),),
-                    ],
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(onPressed: (){}, icon: const Icon(Icons.person_rounded)),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(widget.user,
+                              style: TextStyle(color: Colors.grey.shade400),),
+                            // Text(" . ",
+                            //   style: TextStyle(color: Colors.grey.shade400),),
+                            Text(widget.time,
+                              style: TextStyle(color: Colors.grey.shade400),),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Text(widget.message,),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                  ],
+                ),
               ),
               //delete button
               if (widget.user == currentUser.email)
@@ -203,10 +215,9 @@ class _WallPostState extends State<WallPost> {
           const SizedBox(
             height: 20,
           ),
-
           //buttons
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(
                 children: [
@@ -237,6 +248,27 @@ class _WallPostState extends State<WallPost> {
                   CommentButton(onTap: showCommentDialog),
 
                   const SizedBox(
+                    height: 5,
+                  ),
+
+                  //like counter
+                  const Text(
+                    '0',
+                    //widget.likes.length.toString(),
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              //comment
+              Column(
+                children: [
+                  //comment button
+                  ShareButton(onTap: (){}),
+
+                  const  SizedBox(
                     height: 5,
                   ),
 

@@ -1,6 +1,6 @@
 import 'package:dekoda9/components/bottom_nav_bar.dart';
 import 'package:dekoda9/components/drawer.dart';
-import 'package:dekoda9/pages/camera.dart';
+import 'package:dekoda9/pages/camera_page.dart';
 import 'package:dekoda9/pages/news_feed.dart';
 import 'package:dekoda9/pages/policy.dart';
 import 'package:dekoda9/pages/profile.dart';
@@ -32,7 +32,7 @@ class _HomeState extends State<Home> {
 
   final List<Widget> _pages = [
     const NewsFeed(),
-    const Camera(),
+    const CameraScreen(),
     const Profile(),
     const Settings(),
   ];
@@ -46,12 +46,11 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         elevation: 0,
         //
         title: Text(
-          'Welcome ${user.email!}',
+          '${user.email}',
           style: const TextStyle(color: Colors.grey),
         ),
         //backgroundColor: Colors.grey[300],
