@@ -17,6 +17,7 @@ class WallPost extends StatefulWidget {
   final String postId;
   final List<String> likes;
 
+
   const WallPost({
     super.key,
     required this.message,
@@ -24,6 +25,7 @@ class WallPost extends StatefulWidget {
     required this.time,
     required this.likes,
     required this.postId,
+
   });
 
   @override
@@ -158,6 +160,7 @@ class _WallPostState extends State<WallPost> {
         ));
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -171,7 +174,7 @@ class _WallPostState extends State<WallPost> {
        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(
-            width: 20,
+            width: 10,
           ),
           //wall post
           Row(
@@ -204,6 +207,7 @@ class _WallPostState extends State<WallPost> {
                     const SizedBox(
                       height: 5,
                     ),
+
                   ],
                 ),
               ),

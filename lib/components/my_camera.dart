@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 
+
 late List<CameraDescription> cameras;
 
 class MyCamera extends StatefulWidget {
@@ -15,6 +16,7 @@ class MyCamera extends StatefulWidget {
 }
 
 class _MyCameraState extends State<MyCamera> {
+
   late CameraController _cameraController;
   late Future<void> cameraValue;
 
@@ -35,6 +37,7 @@ class _MyCameraState extends State<MyCamera> {
     super.dispose();
     _cameraController.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {

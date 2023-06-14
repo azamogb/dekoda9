@@ -28,6 +28,7 @@ class _NewsFeedState extends State<NewsFeed> {
       'TimeStamp': Timestamp.now(),
       'Likes' : [],
 
+
     });
   }
     setState((){

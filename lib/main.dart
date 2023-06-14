@@ -1,7 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:dekoda9/Authentication/auth_process.dart';
 import 'package:dekoda9/components/my_camera.dart';
-import 'package:dekoda9/firebase_options.dart';
+import 'package:dekoda9/Resources/firebase_options.dart';
 import 'package:dekoda9/theme/light.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';

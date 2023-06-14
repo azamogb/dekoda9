@@ -43,6 +43,8 @@ dependencies:
   path_provider: ^2.0.15
   path:
   image_picker: ^0.8.8
+  firebase_storage: ^11.2.3
+  uuid: ^3.0.7
 
 dev_dependencies:
   flutter_test:
